@@ -3,18 +3,28 @@ package com.example.service.impl;
 import com.example.model.User;
 import com.example.repository.UserRepository;
 import com.example.service.UserServiceI;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserServiceI {
+
+
+    Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+
+
     @Autowired
     private UserRepository userRepository;                 //Field DI
 
 
     @Override
     public User createUser(User user) {
+
+        logger.info("Initiating the dao call for the save user data");
+
        User savedUser = userRepository.save(user);
         return savedUser;
     }
