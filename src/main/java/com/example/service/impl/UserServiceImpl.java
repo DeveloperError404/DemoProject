@@ -12,8 +12,6 @@ public class UserServiceImpl implements UserServiceI {
     private UserRepository userRepository;                 //Field DI
 
 
-
-
     @Override
     public User createUser(User user) {
        User savedUser = userRepository.save(user);
@@ -23,7 +21,16 @@ public class UserServiceImpl implements UserServiceI {
     @Override
     public User updateUser(User user, Long userId) {
 
-        return null;
+       User user1 = userRepository.findById(userId).get();
+
+        user1.setUserName(user.getUserName());
+        user1.setUserAge(user.getUserAge());
+        user1.setUserId(user.getUserId());
+        user1.setAbout(user.getAbout());
+
+       User updatedUser = userRepository.save(user1);
+
+        return updatedUser ;
     }
 
     @Override
