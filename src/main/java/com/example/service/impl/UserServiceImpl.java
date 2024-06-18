@@ -52,13 +52,12 @@ public class UserServiceImpl implements UserServiceI {
 
 
 
-
-
-
-
     @Override
     public List<User> getAllUsers() {
-        return null;
+        List<User> allUser = userRepository.findAll();
+
+
+        return allUser;
     }
 
     @Override
