@@ -6,6 +6,7 @@ import com.example.service.UserServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Optional;
 
 public class UserServiceImpl implements UserServiceI {
     @Autowired
@@ -34,9 +35,21 @@ public class UserServiceImpl implements UserServiceI {
     }
 
     @Override
-    public User getSingleUser(Long userId) {
-        return null;
+    public User getSingleUser(Long userId) throws Exception {
+        Optional<User> user = userRepository.findById(userId);
+
+        if(user.isPresent()){
+            return user.get();
+        }else{
+            throw new Exception("Resource not found in server"+ userId);
+        }
+
     }
+
+
+
+
+
 
     @Override
     public List<User> getAllUsers() {
